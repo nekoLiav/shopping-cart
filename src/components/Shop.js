@@ -1,24 +1,12 @@
 import { useState, useEffect } from 'react';
 import ShoppingCart from './ShoppingCart';
+import shopData from '../data/shopData';
 
 const Shop = () => {
   const [shopItems, setShopItems] = useState([]);
 
   useEffect(() => {
-    setShopItems([
-      {
-        name: 'one',
-        price: 1,
-      },
-      {
-        name: 'two',
-        price: 2,
-      },
-      {
-        name: 'three',
-        price: 3,
-      },
-    ]);
+    setShopItems(shopData);
   }, []);
 
   return (
