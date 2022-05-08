@@ -26,9 +26,23 @@ body {
   align-items: center;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  background: #1a1a1a;
+  width: 100%;
+}
+
 nav ul {
   display: flex;
   justify-content: center;
   list-style: none;
   gap: 1rem;
+}
+
+nav ul a {
+  color: white;
+  text-decoration: none;
 }

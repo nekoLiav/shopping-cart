@@ -6,10 +6,10 @@ import Nav from './components/Nav';
 function App() {
   return (
     <div className='app'>
-      <Nav />
       <BrowserRouter>
+        <Nav />
         <Routes>
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
         </Routes>
       </BrowserRouter>
