@@ -109,6 +109,11 @@ nav ul a {
   border: 1px solid black;
 }
 
+.cart-summary {
+  display: flex;
+  gap: 1rem;
+}
+
 .shopping-cart {
   display: flex;
   flex-direction: column;
