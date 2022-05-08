@@ -1,20 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ShoppingCart from './ShoppingCart';
 
 const Shop = () => {
-  const [shopItem, setShopItem] = useState(0);
+  const [shopItems, setShopItems] = useState([]);
+
+  useEffect(() => {
+    setShopItems([
+      {
+        name: 'one',
+        price: 1,
+      },
+      {
+        name: 'two',
+        price: 2,
+      },
+      {
+        name: 'three',
+        price: 3,
+      },
+    ]);
+  }, []);
 
   return (
     <div className='shop'>
       <div className='shop-content'>
         <h1>Shop</h1>
-        <button onClick={() => setShopItem(shopItem + 1)}>Click me!</button>
+        <div className='shop-items'>
+          {shopItems.map((item) => (
+            <div className='shop-item' key={`${item.name}${item.price}`}>
+              <h2>{item.name}</h2>
+              <h3>{item.price}</h3>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className='shopping-cart'>
-        <h3 className='cart-summary'>
-          {`Quantity:
-        ${shopItem}`}
-        </h3>
-      </div>
+      <ShoppingCart />
     </div>
   );
 };
