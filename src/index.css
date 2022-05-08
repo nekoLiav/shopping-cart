@@ -18,17 +18,25 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 nav {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 3rem;
   background: #1a1a1a;
@@ -37,12 +45,54 @@ nav {
 
 nav ul {
   display: flex;
-  justify-content: center;
   list-style: none;
   gap: 1rem;
+  margin-left: 1rem;
 }
 
 nav ul a {
   color: white;
   text-decoration: none;
+}
+
+.home {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.home-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+.shop {
+  display: flex;
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.shop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: 20vw;
+  margin-left: auto;
 }
