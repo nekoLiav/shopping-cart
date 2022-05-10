@@ -1,33 +1,52 @@
 import { useState, useEffect } from 'react';
+import ShopItems from './ShopItems';
 import ShoppingCart from './ShoppingCart';
 import shopData from '../data/shopData';
 
 const Shop = () => {
   const [shopItems, setShopItems] = useState([]);
-  const [cartView, setCartView] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    setShopItems(shopData);
+    setShopItems(shopData.map((item) => Object.assign(item, { quantity: 1 })));
   }, []);
+
+  const handleQuantityChange = (item, e) => {
+    setShopItems((items) =>
+      items.map((items) =>
+        items.name === item.name ? { ...items, quantity: Number(e.target.value) } : items,
+      ),
+    );
+  };
+
+  const addToCart = (item) => {
+    cart.map((items) => items.name).includes(item.name)
+      ? setCart((items) =>
+          items.map((items) =>
+            items.name === item.name
+              ? {
+                  ...items,
+                  data: { price: item.data.price * (items.quantity + item.quantity) },
+                  quantity: items.quantity + item.quantity,
+                }
+              : items,
+          ),
+        )
+      : setCart((items) => [...items, item]);
+  };
 
   return (
     <div className='shop'>
       <div className='shop-content'>
-        <h1>Shop</h1>
-        <h3 className='cart-summary'>
-          <p>Price in Quantity items</p>
-          <button onClick={() => setCartView(cartView ? false : true)}>View Cart</button>
-        </h3>
-        <div className='shop-items'>
-          {shopItems.map((item) => (
-            <div className='shop-item' key={`${item.name}${item.price}`}>
-              <h2>{item.name}</h2>
-              <h3>{item.price}</h3>
-            </div>
-          ))}
-        </div>
+        <h1 className='shop-header'>Shop</h1>
+        <ShopItems
+          shopItems={shopItems}
+          changeQuantity={handleQuantityChange}
+          addToCart={addToCart}
+        />
       </div>
-      {cartView && <ShoppingCart />}
+      <ShoppingCart cart={cart} />
+      <div className='cart-summary'></div>
     </div>
   );
 };
