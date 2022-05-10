@@ -6,6 +6,7 @@ import shopData from '../data/shopData';
 const Shop = () => {
   const [shopItems, setShopItems] = useState([]);
   const [cart, setCart] = useState([]);
+  const [cartView, setCartView] = useState(false);
 
   useEffect(() => {
     setShopItems(shopData.map((item) => Object.assign(item, { quantity: 1 })));
@@ -45,8 +46,11 @@ const Shop = () => {
           addToCart={addToCart}
         />
       </div>
-      <ShoppingCart cart={cart} />
-      <div className='cart-summary'></div>
+      {cartView ? <ShoppingCart cart={cart} /> : null}
+      <div className='cart-summary' onClick={() => setCartView(cartView ? false : true)}>
+        <p>{`${cart.reduce((prev, cur) => prev + cur.quantity, 0)} items`}</p>
+        <p>{`${cart.reduce((prev, cur) => prev + cur.data.price, 0)} dollarydoos`}</p>
+      </div>
     </div>
   );
 };
