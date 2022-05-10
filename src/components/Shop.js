@@ -9,15 +9,12 @@ const Shop = () => {
   const [cartView, setCartView] = useState(false);
 
   useEffect(() => {
-    // setShopItems(shopData.map((item) => Object.assign(item, { quantity: 1 })));
     const fakeStoreAPIFetch = async () => {
       const fetchedData = await fetch('https://fakestoreapi.com/products/');
       const response = await fetchedData.json();
-      console.log(response);
       setShopItems(response.map((items) => Object.assign(items, { quantity: 1 })));
     };
     fakeStoreAPIFetch();
-    console.log(shopItems);
   }, []);
 
   const handleQuantityChange = (item, e) => {
