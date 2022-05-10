@@ -4,7 +4,8 @@ const ShopItems = (props) => {
     <div className='shop-items'>
       {props.shopItems.map((item) => (
         <div className='shop-item' key={item.id}>
-          <p>{`${item.title}`}</p>
+          <p className='shop-item-title'>{`${item.title}`}</p>
+          <img className='shop-item-img' src={item.image}></img>
           <p>{`Price: ${item.price.toFixed(2)}`}</p>
           <input
             type='text'

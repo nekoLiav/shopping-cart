@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import CartSummary from './CartSummary';
 import ShopItems from './ShopItems';
 import ShoppingCart from './ShoppingCart';
 
@@ -34,7 +35,7 @@ const Shop = () => {
           if (items.title === item.title) {
             return {
               ...items,
-              data: { price: item.price * (items.quantity + item.quantity) },
+              price: item.price * (items.quantity + item.quantity),
               quantity: items.quantity + item.quantity,
             };
           } else {
@@ -43,7 +44,7 @@ const Shop = () => {
         }),
       );
     } else {
-      setCart((items) => [...items, { ...item, data: { price: item.price * item.quantity } }]);
+      setCart((items) => [...items, { ...item, price: item.price * item.quantity }]);
     }
   };
 
@@ -58,10 +59,7 @@ const Shop = () => {
         />
       </div>
       {cartView ? <ShoppingCart cart={cart} /> : null}
-      <div className='cart-summary' onClick={() => setCartView(cartView ? false : true)}>
-        <p>{`${cart.reduce((prev, cur) => prev + cur.quantity, 0)} items`}</p>
-        <p>{`${cart.reduce((prev, cur) => prev + cur.data.price, 0).toFixed(2)} dollarydoos`}</p>
-      </div>
+      <CartSummary cart={cart} toggleView={() => setCartView(cartView ? false : true)} />
     </div>
   );
 };

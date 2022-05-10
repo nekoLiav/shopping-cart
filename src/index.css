@@ -112,9 +112,20 @@ nav ul a {
   align-items: center;
   justify-content: space-around;
   justify-self: center;
+  text-align: center;
   height: 300px;
   width: 250px;
   border: 1px solid black;
+  padding: 1rem;
+  gap: 0.5rem;
+}
+
+.shop-item-title {
+  margin-bottom: auto;
+}
+
+.shop-item-img {
+  max-height: 5rem;
 }
 
 .cart-summary {
