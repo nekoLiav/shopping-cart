@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import ShopItems from './ShopItems';
 import ShoppingCart from './ShoppingCart';
-import shopData from '../data/shopData';
 
 const Shop = () => {
   const [shopItems, setShopItems] = useState([]);
@@ -9,25 +8,33 @@ const Shop = () => {
   const [cartView, setCartView] = useState(false);
 
   useEffect(() => {
-    setShopItems(shopData.map((item) => Object.assign(item, { quantity: 1 })));
+    // setShopItems(shopData.map((item) => Object.assign(item, { quantity: 1 })));
+    const fakeStoreAPIFetch = async () => {
+      const fetchedData = await fetch('https://fakestoreapi.com/products/');
+      const response = await fetchedData.json();
+      console.log(response);
+      setShopItems(response.map((items) => Object.assign(items, { quantity: 1 })));
+    };
+    fakeStoreAPIFetch();
+    console.log(shopItems);
   }, []);
 
   const handleQuantityChange = (item, e) => {
     setShopItems((items) =>
       items.map((items) =>
-        items.name === item.name ? { ...items, quantity: Number(e.target.value) } : items,
+        items.title === item.title ? { ...items, quantity: Number(e.target.value) } : items,
       ),
     );
   };
 
   const addToCart = (item) => {
-    if (cart.map((items) => items.name).includes(item.name)) {
+    if (cart.map((items) => items.title).includes(item.title)) {
       setCart((items) =>
         items.map((items) => {
-          if (items.name === item.name) {
+          if (items.title === item.title) {
             return {
               ...items,
-              data: { price: item.data.price * (items.quantity + item.quantity) },
+              data: { price: item.price * (items.quantity + item.quantity) },
               quantity: items.quantity + item.quantity,
             };
           } else {
@@ -36,7 +43,7 @@ const Shop = () => {
         }),
       );
     } else {
-      setCart((items) => [...items, { ...item, data: { price: item.data.price * item.quantity } }]);
+      setCart((items) => [...items, { ...item, data: { price: item.price * item.quantity } }]);
     }
   };
 
@@ -53,7 +60,7 @@ const Shop = () => {
       {cartView ? <ShoppingCart cart={cart} /> : null}
       <div className='cart-summary' onClick={() => setCartView(cartView ? false : true)}>
         <p>{`${cart.reduce((prev, cur) => prev + cur.quantity, 0)} items`}</p>
-        <p>{`${cart.reduce((prev, cur) => prev + cur.data.price, 0)} dollarydoos`}</p>
+        <p>{`${cart.reduce((prev, cur) => prev + cur.data.price, 0).toFixed(2)} dollarydoos`}</p>
       </div>
     </div>
   );

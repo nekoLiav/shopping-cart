@@ -3,9 +3,9 @@ const ShopItems = (props) => {
   return (
     <div className='shop-items'>
       {props.shopItems.map((item) => (
-        <div className='shop-item' key={item.name}>
-          <p>{`Name: ${item.name}`}</p>
-          <p>{`Price: ${item.data.price}`}</p>
+        <div className='shop-item' key={item.id}>
+          <p>{`${item.title}`}</p>
+          <p>{`Price: ${item.price.toFixed(2)}`}</p>
           <input
             type='text'
             value={item.quantity}

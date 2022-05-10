@@ -2,11 +2,11 @@
 const ShoppingCart = (props) => {
   return (
     <div className='shopping-cart'>
-      {props.cart.map((items) => (
-        <div className='cart-item' key={items.name}>
-          <p>{`Name: ${items.name}`}</p>
-          <p>{`Price: ${items.data.price}`}</p>
-          <p>{`Quantity: ${items.quantity}`}</p>
+      {props.cart.map((item) => (
+        <div className='cart-item' key={item.id}>
+          <p>{item.title}</p>
+          <p>{`$${item.price.toFixed(2)}`}</p>
+          <p>{`x${item.quantity}`}</p>
         </div>
       ))}
     </div>
