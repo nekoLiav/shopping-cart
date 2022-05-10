@@ -21,19 +21,23 @@ const Shop = () => {
   };
 
   const addToCart = (item) => {
-    cart.map((items) => items.name).includes(item.name)
-      ? setCart((items) =>
-          items.map((items) =>
-            items.name === item.name
-              ? {
-                  ...items,
-                  data: { price: item.data.price * (items.quantity + item.quantity) },
-                  quantity: items.quantity + item.quantity,
-                }
-              : items,
-          ),
-        )
-      : setCart((items) => [...items, item]);
+    if (cart.map((items) => items.name).includes(item.name)) {
+      setCart((items) =>
+        items.map((items) => {
+          if (items.name === item.name) {
+            return {
+              ...items,
+              data: { price: item.data.price * (items.quantity + item.quantity) },
+              quantity: items.quantity + item.quantity,
+            };
+          } else {
+            return items;
+          }
+        }),
+      );
+    } else {
+      setCart((items) => [...items, { ...item, data: { price: item.data.price * item.quantity } }]);
+    }
   };
 
   return (
