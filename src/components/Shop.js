@@ -12,16 +12,20 @@ const Shop = () => {
     const fakeStoreAPIFetch = async () => {
       const fetchedData = await fetch('https://fakestoreapi.com/products/');
       const response = await fetchedData.json();
-      setShopItems(response.map((items) => Object.assign(items, { quantity: 1 })));
+      setShopItems(response.map((items) => ({ ...items, quantity: 1 })));
     };
     fakeStoreAPIFetch();
   }, []);
 
-  const handleQuantityChange = (item, e) => {
+  const changeQuantity = (item, e) => {
     setShopItems((items) =>
-      items.map((items) =>
-        items.title === item.title ? { ...items, quantity: Number(e.target.value) } : items,
-      ),
+      items.map((items) => {
+        if (items.title === item.title) {
+          return { ...items, quantity: Number(e.target.value) };
+        } else {
+          return items;
+        }
+      }),
     );
   };
 
@@ -48,14 +52,10 @@ const Shop = () => {
   return (
     <div className='shop'>
       <div className='shop-content'>
-        <h1 className='shop-header'>Shop</h1>
-        <ShopItems
-          shopItems={shopItems}
-          changeQuantity={handleQuantityChange}
-          addToCart={addToCart}
-        />
+        <p className='page-header-text'>Shop</p>
+        <ShopItems shopItems={shopItems} changeQuantity={changeQuantity} addToCart={addToCart} />
       </div>
-      {cartView ? <ShoppingCart cart={cart} /> : null}
+      <ShoppingCart cart={cart} cartView={cartView} />
       <CartSummary cart={cart} toggleView={() => setCartView(cartView ? false : true)} />
     </div>
   );
