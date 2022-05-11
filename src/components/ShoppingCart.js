@@ -1,21 +1,18 @@
 /* eslint-disable react/prop-types */
+import { Link } from 'react-router-dom';
+import CartItems from './CartItems';
+
 const ShoppingCart = (props) => {
   if (props.cartView) {
     return (
       <div className='shopping-cart'>
         <div className='cart-header'>
-          <h1>Cart</h1>
+          <p>Cart</p>
         </div>
-        <div className='cart-items'>
-          {props.cart.map((item) => (
-            <div className='cart-item' key={item.id}>
-              <p>{item.title}</p>
-              <p>{`$${item.price.toFixed(2)}`}</p>
-              <p>{`x${item.quantity}`}</p>
-            </div>
-          ))}
-        </div>
-        <button className='checkout-button'>Checkout</button>
+        <CartItems cart={props.cart} />
+        <Link to='/checkout' state={{ cart: props.cart }}>
+          Checkout
+        </Link>
       </div>
     );
   } else {
