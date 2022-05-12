@@ -23,12 +23,19 @@ const Checkout = () => {
     }
   }, [promoApplied]);
 
-  const taxes = totalPrice > 0 ? (totalPrice / totalQuantity) * 0.69 : 0;
+  const taxes = totalPrice > 0 ? totalQuantity * 0.69 : 0;
 
   return (
     <div className='checkout'>
+      <p className='page-header-text'>Checkout</p>
       <div className='checkout-content'>
-        <p className='page-header-text'>Checkout</p>
+        <div className='checkout-promos'>
+          <p className='current-promos'>Current Promotions</p>
+          <div className='promo'>
+            <p className='promo-header'>20% OFF!</p>
+            <p>Use code NICE at checkout!</p>
+          </div>
+        </div>
         <div className='checkout-main'>
           <CartItems cart={cart} />
           <div className='checkout-promo-container'>
@@ -55,6 +62,7 @@ const Checkout = () => {
             </a>
           </div>
         </div>
+        <div className='checkout-ads'></div>
       </div>
     </div>
   );

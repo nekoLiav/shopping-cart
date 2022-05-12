@@ -58,11 +58,11 @@ const Shop = () => {
 
   return (
     <div className='shop'>
+      <p className='page-header-text'>Shop</p>
       <div className='shop-content'>
-        <p className='page-header-text'>Shop</p>
         <ShopItems shopItems={shopItems} changeQuantity={changeQuantity} addToCart={addToCart} />
+        <ShoppingCart cart={cart} cartView={cartView} />
       </div>
-      <ShoppingCart cart={cart} cartView={cartView} />
       <CartSummary cart={cart} toggleView={() => setCartView(cartView ? false : true)} />
     </div>
   );
