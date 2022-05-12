@@ -6,7 +6,9 @@ const CartItems = (props) => {
         <div className='cart-item' key={item.id}>
           <img className='cart-item-img' src={item.image} />
           <div className='cart-item-details'>
-            <p>{item.title.length > 20 ? `${item.title.substring(0, 20)} ...` : item.title}</p>
+            <p className='cart-item-title'>
+              {item.title.length > 20 ? `${item.title.substring(0, 20)} ...` : item.title}
+            </p>
             <p>{`$${item.price.toFixed(2)}`}</p>
             <p>{`x${item.quantity}`}</p>
           </div>

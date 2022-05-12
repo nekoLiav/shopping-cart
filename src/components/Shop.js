@@ -12,18 +12,25 @@ const Shop = () => {
     const fakeStoreAPIFetch = async () => {
       const fetchedData = await fetch('https://fakestoreapi.com/products/');
       const response = await fetchedData.json();
-      setShopItems(response.map((items) => ({ ...items, quantity: 1 })));
+      // assign a base quantity of 1 to all shop items
+      setShopItems(response.map((shopItem) => ({ ...shopItem, quantity: 1 })));
     };
     fakeStoreAPIFetch();
   }, []);
 
-  const changeQuantity = (item, e) => {
-    setShopItems((items) =>
-      items.map((items) => {
-        if (items.title === item.title) {
-          return { ...items, quantity: Number(e.target.value) };
+  const changeQuantity = (shopItem, e) => {
+    setShopItems((currentShopItems) =>
+      currentShopItems.map((currentShopItem) => {
+        if (currentShopItem.title === shopItem.title) {
+          if (e.target.nodeName === 'INPUT') {
+            return { ...currentShopItem, quantity: Number(e.target.value) };
+          } else if (e.target.id === 'increment') {
+            return { ...currentShopItem, quantity: currentShopItem.quantity + 1 };
+          } else if (e.target.id === 'decrement') {
+            return { ...currentShopItem, quantity: currentShopItem.quantity - 1 };
+          }
         } else {
-          return items;
+          return currentShopItem;
         }
       }),
     );

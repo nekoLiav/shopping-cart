@@ -11,7 +11,7 @@ const ShoppingCart = (props) => {
         </div>
         <CartItems cart={props.cart} />
         <Link to='/checkout' state={{ cart: props.cart }}>
-          Checkout
+          <p className='checkout-link'>Checkout</p>
         </Link>
       </div>
     );
