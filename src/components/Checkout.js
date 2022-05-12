@@ -1,14 +1,61 @@
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import CartItems from './CartItems';
+import Promo from './Promo';
 
 const Checkout = () => {
   const location = useLocation();
   const cart = location.state?.cart;
+  const totalQuantity = cart.reduce((prev, cur) => prev + cur.quantity, 0);
+  const subtotal = cart.reduce((prev, cur) => prev + cur.price, 0).toFixed(2);
+
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [trollState, setTrollState] = useState('');
+
+  useEffect(() => {
+    if (promoApplied) {
+      setTotalPrice((prevPrice) => (prevPrice - prevPrice * 0.2).toFixed(2));
+      setTrollState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+    } else {
+      setTotalPrice(subtotal);
+      setTrollState('');
+    }
+  }, [promoApplied]);
+
+  const taxes = totalPrice > 0 ? (totalPrice / totalQuantity) * 0.69 : 0;
 
   return (
     <div className='checkout'>
-      <p className='page-header-text'>Checkout</p>
-      <CartItems cart={cart} />
+      <div className='checkout-content'>
+        <p className='page-header-text'>Checkout</p>
+        <div className='checkout-main'>
+          <CartItems cart={cart} />
+          <div className='checkout-promo-container'>
+            <p>Have a promo code?</p>
+            <Promo setPromoApplied={setPromoApplied} />
+          </div>
+          <div className='checkout-info'>
+            <div className='cash-money'>
+              <div className='money'>
+                <p>Subtotal:</p>
+                <p>{`$${totalPrice}`}</p>
+              </div>
+              <div className='money'>
+                <p>Tax:</p>
+                <p>{`$${taxes.toFixed(2)}`}</p>
+              </div>
+              <div className='money'>
+                <p>Total:</p>
+                <p>{`$${(Number(totalPrice) + Number(taxes)).toFixed(2)}`}</p>
+              </div>
+            </div>
+            <a className='payment-button' href={trollState}>
+              Pay
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

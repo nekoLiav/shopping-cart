@@ -6,7 +6,7 @@ const ShoppingCart = (props) => {
   if (props.cartView) {
     return (
       <div className='shopping-cart'>
-        <div className='cart-header'>
+        <div className='page-header-text'>
           <p>Cart</p>
         </div>
         <CartItems cart={props.cart} />
