@@ -58,7 +58,7 @@ const Shop = () => {
 
   return (
     <div className='shop'>
-      <p className='page-header-text'>Shop</p>
+      <h1 className='page-header-text'>Shop</h1>
       <div className='shop-content'>
         <ShopItems shopItems={shopItems} changeQuantity={changeQuantity} addToCart={addToCart} />
         <ShoppingCart cart={cart} cartView={cartView} />

@@ -27,7 +27,7 @@ const Checkout = () => {
 
   return (
     <div className='checkout'>
-      <p className='page-header-text'>Checkout</p>
+      <h1 className='page-header-text'>Checkout</h1>
       <div className='checkout-content'>
         <div className='checkout-promos'>
           <p className='current-promos'>Current Promotions</p>
