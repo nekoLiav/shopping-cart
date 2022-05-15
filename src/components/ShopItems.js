@@ -3,7 +3,7 @@ const ShopItems = (props) => {
   return (
     <div className='shop-items'>
       {props.shopItems.map((shopItem) => (
-        <div className='shop-item' key={shopItem.id}>
+        <div className='shop-item' data-testid='shop-item' key={shopItem.id}>
           <img className='shop-item-img' src={shopItem.image}></img>
           <p className='shop-item-title'>{`${shopItem.title}`}</p>
           <p>{`$${shopItem.price.toFixed(2)}`}</p>

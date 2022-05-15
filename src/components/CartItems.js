@@ -3,7 +3,7 @@ const CartItems = (props) => {
   return (
     <div className='cart-items'>
       {props.cart.map((item) => (
-        <div className='cart-item' key={item.id}>
+        <div className='cart-item' data-testid='cart-item' key={item.id}>
           <img className='cart-item-img' src={item.image} />
           <div className='cart-item-details'>
             <p className='cart-item-title'>

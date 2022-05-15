@@ -6,7 +6,7 @@ const Promo = (props) => {
 
   const handlePromoChange = (e) => {
     setPromo(e.target.value);
-    props.setPromoApplied(() => (e.target.value === 'NICE' ? true : false));
+    props.setPromoApplied(e.target.value === 'NICE' ? true : false);
   };
 
   return (
