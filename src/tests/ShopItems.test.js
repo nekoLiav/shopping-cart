@@ -11,43 +11,42 @@ const shopItems = [
   { id: 2, title: 'baz', price: 10 },
 ];
 
+const changeQuantityMock = jest.fn();
+
 describe('ShopItems component', () => {
   describe('shop item', () => {
     it('changeQuantity is called when input is typed into', async () => {
-      const inputQuantityMock = jest.fn();
       render(
         <BrowserRouter>
-          <ShopItems shopItems={shopItems} changeQuantity={inputQuantityMock} />
+          <ShopItems shopItems={shopItems} changeQuantity={changeQuantityMock} />
         </BrowserRouter>,
       );
       const user = userEvent.setup();
       const shopItemInput = within(screen.getAllByTestId('shop-item')[0]).getByRole('textbox');
       await user.type(shopItemInput, '10');
-      expect(inputQuantityMock).toHaveBeenCalledTimes(2);
+      expect(changeQuantityMock).toHaveBeenCalledTimes(2);
     });
 
     it('changeQuantity is called when button is clicked', async () => {
-      const incrementQuantityMock = jest.fn();
       render(
         <BrowserRouter>
-          <ShopItems shopItems={shopItems} changeQuantity={incrementQuantityMock} />
+          <ShopItems shopItems={shopItems} changeQuantity={changeQuantityMock} />
         </BrowserRouter>,
       );
       const user = userEvent.setup();
       await user.click(screen.getAllByText('+')[0]);
-      expect(incrementQuantityMock).toHaveBeenCalled();
+      expect(changeQuantityMock).toHaveBeenCalled();
     });
 
     it('changeQuantity is called when button is clicked', async () => {
-      const decrementQuantityMock = jest.fn();
       render(
         <BrowserRouter>
-          <ShopItems shopItems={shopItems} changeQuantity={decrementQuantityMock} />
+          <ShopItems shopItems={shopItems} changeQuantity={changeQuantityMock} />
         </BrowserRouter>,
       );
       const user = userEvent.setup();
       await user.click(screen.getAllByText('-')[0]);
-      expect(decrementQuantityMock).toHaveBeenCalled();
+      expect(changeQuantityMock).toHaveBeenCalled();
     });
 
     it('addToCart is called when button is clicked', async () => {
