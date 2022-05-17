@@ -11,15 +11,15 @@ const Checkout = () => {
 
   const [promoApplied, setPromoApplied] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [trollState, setTrollState] = useState('');
+  const [troll, setTroll] = useState('');
 
   useEffect(() => {
     if (promoApplied) {
       setTotalPrice((prevPrice) => (prevPrice - prevPrice * 0.2).toFixed(2));
-      setTrollState('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+      setTroll('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
     } else {
       setTotalPrice(subtotal);
-      setTrollState('');
+      setTroll('/shopping-cart');
     }
   }, [promoApplied]);
 
@@ -57,7 +57,7 @@ const Checkout = () => {
                 <p>{`$${(Number(totalPrice) + Number(taxes)).toFixed(2)}`}</p>
               </div>
             </div>
-            <a className='payment-button' href={trollState}>
+            <a className='payment-button' href={troll}>
               Pay
             </a>
           </div>
