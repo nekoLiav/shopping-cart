@@ -10,7 +10,7 @@ const ShopItems = (props) => {
           <div className='quantity-selectors'>
             <p>Quantity:</p>
             <input
-              type='text'
+              type='number'
               value={shopItem.quantity}
               onChange={(e) => props.changeQuantity(shopItem, e)}
             />
